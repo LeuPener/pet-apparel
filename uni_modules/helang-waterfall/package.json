@@ -1,0 +1,77 @@
+{
+  "id": "helang-waterfall",
+  "displayName": "瀑布流布局-waterfall",
+  "version": "1.2.4",
+  "description": "一款简单又好用的瀑布流布局组件，全新升级为组件+插槽的方案实现，极大的简便了组件的使用和内容调整。",
+  "keywords": [
+    "瀑布流",
+    "布局",
+    "列表",
+    "waterfall"
+],
+  "repository": "https://gitee.com/myDarling/uniapp-extend",
+  "engines": {
+    "HBuilderX": "^4.0"
+  },
+"dcloudext": {
+    "sale": {
+      "regular": {
+        "price": "0.00"
+      },
+      "sourcecode": {
+        "price": "0.00"
+      }
+    },
+    "contact": {
+      "qq": ""
+    },
+    "declaration": {
+      "ads": "无",
+      "data": "无",
+      "permissions": "无"
+    },
+    "npmurl": "",
+    "type": "uniapp-template-page"
+  },
+  "uni_modules": {
+    "dependencies": [],
+    "encrypt": [],
+    "platforms": {
+      "cloud": {
+        "tcb": "y",
+        "aliyun": "y",
+        "alipay": "n"
+      },
+      "client": {
+        "App": {
+          "app-vue": "y",
+          "app-nvue": "u"
+        },
+        "H5-mobile": {
+          "Safari": "y",
+          "Android Browser": "y",
+          "微信浏览器(Android)": "y",
+          "QQ浏览器(Android)": "y"
+        },
+        "H5-pc": {
+          "Chrome": "y",
+          "IE": "y",
+          "Edge": "y",
+          "Firefox": "y",
+          "Safari": "y"
+        },
+        "小程序": {
+          "微信": "y",
+          "阿里": "y",
+          "百度": "y",
+          "字节跳动": "y",
+          "QQ": "y"
+        },
+        "快应用": {
+          "华为": "y",
+          "联盟": "y"
+        }
+      }
+    }
+  }
+}

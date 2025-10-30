@@ -1,4 +1,7 @@
 {
+	"easycom": {
+		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
 			"path": "pages/index/index",
@@ -6,13 +9,88 @@
 				"navigationBarTitleText": "宠物衣服AI",
 				"navigationBarBackgroundColor": "#FCD610"
 			}
+		},
+		{
+			"path": "pages/index/createPhoto/createPhoto",
+			"style": {
+				"navigationBarTitleText": "宠物趣味照生成",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#eff2f3"
+			}
+		},
+
+		{
+			"path": "pages/mine/mine",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#eff2f3"
+			}
+		},
+		{
+			"path": "pages/mine/buyPoints/buyPoints",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#eff2f3"
+			}
+		},
+		{
+			"path": "pages/records/records",
+			"style": {
+				"navigationBarTitleText": "生成记录",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#fff"
+			}
+		},
+		{
+			"path": "pages/mine/contact/contact",
+			"style": {
+				"navigationBarTitleText": "联系客服",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#fff"
+			}
+		},
+		{
+			"path": "pages/index/agreement/agreement",
+			"style": {
+				"navigationBarTitleText": "用户协议",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#fff"
+			}
 		}
+
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "宠物衣服AI",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#B5B5B5",
+		"selectedColor": "#000",
+		"borderStyle": "white",
+		"backgroundColor": "#FFFFFF",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "/static/tabbar/home.png",
+				"selectedIconPath": "/static/tabbar/homeed.png"
+			},
+			{
+				"pagePath": "pages/records/records",
+				"text": "转换记录",
+				"iconPath": "/static/tabbar/quan.png",
+				"selectedIconPath": "/static/tabbar/quaned.png"
+			},
+			{
+				"pagePath": "pages/mine/mine",
+				"text": "我的",
+				"iconPath": "/static/tabbar/mine.png",
+				"selectedIconPath": "/static/tabbar/mineed.png"
+			}
+		]
 	},
 	"uniIdRouter": {}
 }
