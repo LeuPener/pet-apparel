@@ -8,6 +8,6 @@ export default {
 	},
 
 	login(data) {
-		return request.post('/pet/login_by_weixin', data);
+		return request.post('/api/user/third', data);
 	},
 }

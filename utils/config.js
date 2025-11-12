@@ -1,5 +1,5 @@
 export default {
-  baseURL: "http://10.55.18.34:8080",
-  mobeilURL: "http://10.55.18.34:8080",
-  pageSize: 5,
+	baseURL: "https://fuzhuang.doushou.top",
+	mobeilURL: "https://fuzhuang.doushou.top",
+	pageSize: 5,
 };

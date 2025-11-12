@@ -1,6 +1,7 @@
 <template>
 	<view class="page-content">
 		<MyPoints :points="points" :showTobtn="showTobtn"></MyPoints>
+		<TemplateDetail :list="receivedData"></TemplateDetail>
 		<view class="upload pd-box">
 			<l-upload
 				width="500"
@@ -47,22 +48,28 @@
 				</view>
 			</view>
 		</view>
+		<u-gap height="30rpx"></u-gap>
 	</view>
 </template>
 
 <script>
+import createPhoto from '@/api/createPhoto.js';
 import lUpload from '@/components/l-upload/l-upload.vue';
 import MyPoints from '@/components/MyPoints/MyPoints.vue';
 import FormItemTitle from '@/components/FormItemTitle/FormItemTitle.vue';
+import TemplateDetail from '@/components/TemplateDetail/TemplateDetail.vue';
 
 export default {
 	components: {
 		lUpload,
 		MyPoints,
+		TemplateDetail,
 		FormItemTitle
 	},
 	data() {
 		return {
+			receivedId: '',
+			receivedData: {},
 			points: 100,
 			showTobtn: true,
 			action: '/common/uploadFile',
@@ -96,7 +103,22 @@ export default {
 			]
 		};
 	},
+	onLoad(options) {
+		this.fetchDetail(options);
+	},
 	methods: {
+		fetchDetail({ id }) {
+			this.receivedId = id;
+			createPhoto
+				.getTemplateDetail({ id })
+				.then((res) => {
+					this.receivedData = res.data;
+					console.log(res);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		},
 		successPhoto(data) {
 			console.log(data);
 			this.formdata.photo = data.imageArr;

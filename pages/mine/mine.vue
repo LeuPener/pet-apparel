@@ -1,5 +1,9 @@
 <template>
 	<view class="page-content">
+		<view class="id-display">
+			<text class="id-label">我的ID</text>
+			<text class="id-value">154</text>
+		</view>
 		<MyPoints :points="points" :showTobtn="showTobtn"></MyPoints>
 		<view class="link-box">
 			<u-cell-group :border="false">
@@ -43,5 +47,26 @@ export default {
 	background-color: #fff;
 	margin-top: 20rpx;
 	border-radius: 16rpx;
+}
+.id-display {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 20rpx 30rpx;
+	background-color: #fff;
+	border-radius: 16rpx;
+	margin-bottom: 20rpx;
+}
+
+.id-label {
+	font-size: 28rpx;
+	color: #666;
+	margin-right: 10rpx;
+}
+
+.id-value {
+	font-size: 32rpx;
+	color: #333;
+	font-weight: bold;
 }
 </style>

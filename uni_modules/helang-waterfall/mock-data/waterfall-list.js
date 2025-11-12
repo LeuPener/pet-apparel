@@ -27,7 +27,7 @@ let list = (page) => {
 			for (let i = 0; i < 6; i++) {
 				res.push({
 					id: `${Date.now()}_${i+1}`,
-					imgUrl: `/uni_modules/helang-waterfall/static/waterfall/${random(0,3)}.jpg`,
+					preview_image: `/uni_modules/helang-waterfall/static/waterfall/${random(0,3)}.jpg`,
 					title: titles[random(0, titles.length)],
 					money: random(9, 9999),
 					label: '官方自营',

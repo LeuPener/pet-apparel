@@ -1,6 +1,6 @@
 <template>
 	<view class="template-list" style="padding: 20rpx 0">
-		<waterfall ref="helangWaterfall" :hideList="hideList" imageKey="imgUrl" @statusChange="handleStatusChange">
+		<waterfall ref="helangWaterfall" :hideList="hideList" imageKey="preview_image" @statusChange="handleStatusChange">
 			<template v-slot:default="{ list, colWidth }">
 				<waterfall-col v-for="(colItem, colIndex) in list" :key="colIndex" :colWidth="colWidth">
 					<template>
@@ -11,15 +11,15 @@
 							:reportHeightTime="item.__waterfall_reportHeightTime"
 							@height="onRenderHeight"
 						>
-							<view class="content" @click="handleClick" :data-col_index="colIndex" :data-item_index="index">
+							<view class="content" @click="handleClick(item.id)" :data-col_index="colIndex" :data-item_index="index">
 								<view class="hot-bagde">
 									<image style="width: 24rpx; height: 24rpx" src="/static/images/index/fire.png" mode="aspectFill"></image>
-									<text style="margin-left: 4rpx">9.7w</text>
+									<text style="margin-left: 4rpx">{{ item.usage_count }}</text>
 								</view>
-								<image class="image" mode="aspectFill" :src="item.imgUrl" :style="{ height: item.__waterfall_imageHeight }">
+								<image class="image" mode="aspectFill" :src="item.preview_image" :style="{ height: item.__waterfall_imageHeight }">
 									<!-- 必须给图片的高度设置为 __waterfall_imageHeight 属性的高 -->
 								</image>
-								<view class="title">{{ item.title }}</view>
+								<view class="title">{{ item.name }}</view>
 							</view>
 						</waterfall-item>
 					</template>
@@ -38,7 +38,7 @@
 						</template>
 					</view>
 					<view v-else style="padding-top: 30rpx">
-						<u-loadmore status="loading" />
+						<u-loadmore :status="loadmore.status" :loading-text="loadmore.loadingText" :loadmore-text="loadmore.loadmoreText" :nomore-text="loadmore.nomoreText" />
 					</view>
 				</view>
 			</template>
@@ -52,8 +52,8 @@ import Waterfall from '@/uni_modules/helang-waterfall/components/waterfall/water
 import WaterfallCol from '@/uni_modules/helang-waterfall/components/waterfall/waterfall-col';
 import WaterfallItem from '@/uni_modules/helang-waterfall/components/waterfall/waterfall-item';
 
-// 列表接口模拟数据，真是项目不需要
-import mockData from '@/uni_modules/helang-waterfall/mock-data/waterfall-list.js';
+import config from '@/utils/config.js';
+import index from '@/api/index.js';
 
 export default {
 	components: {
@@ -114,6 +114,12 @@ export default {
 				status: '',
 				// 是否渲染完成
 				renderEnd: true
+			},
+			loadmore: {
+				status: 'loading',
+				loadingText: '努力加载中',
+				loadmoreText: '轻轻上拉',
+				nomoreText: '没有更多了'
 			}
 		};
 	},
@@ -156,14 +162,12 @@ export default {
 			this.ajax.load = false;
 
 			// 请求数据， mockData.getList 示例一个 ajax 请求
-			mockData
-				.getList({
-					pageNum: this.ajax.page,
-					pageSize: this.ajax.rows
+			index
+				.getTemplateList({
+					page: this.ajax.page
 				})
 				.then((res) => {
 					// 获取到的数据，请注意数据结构
-					console.log(res);
 
 					// 第一页数据执行以下代码
 					if (this.ajax.page == 1) {
@@ -172,9 +176,11 @@ export default {
 					}
 
 					// 数据无效时处理
-					if (!res || res.length < 1) {
+					if (!res.data || res.data.list.length < 1) {
 						// 设置提示内容
-						this.waterfall.status = this.ajax.page === 1 ? 'fail' : 'empty';
+						// this.waterfall.status = this.ajax.page === 1 ? 'fail' : 'empty';
+						this.loadmore.status = 'nomore';
+
 						return;
 					}
 
@@ -184,8 +190,14 @@ export default {
 					if (reset) {
 						this.waterfall.status = '';
 					}
+
+					const processedList = res.data.list.map((item) => ({
+						...item, // 展开原对象的所有属性
+						preview_image: config.mobeilURL + (item.preview_image || '')
+					}));
+
 					// 调用 render 方法，使组件开始进入渲染阶段
-					this.$refs.helangWaterfall.render(res, reset);
+					this.$refs.helangWaterfall.render(processedList, reset);
 					this.ajax.load = true;
 					this.ajax.page++;
 				});
@@ -202,10 +214,9 @@ export default {
 			});
 		},
 		// 瀑布流组件点击事件
-		handleClick(e) {
-			const { col_index, item_index } = e?.currentTarget?.dataset;
+		handleClick(id) {
 			uni.navigateTo({
-				url: '/pages/index/createPhoto/createPhoto'
+				url: `/pages/index/createPhoto/createPhoto?id=${id}`
 			});
 		},
 		// 处理瀑布流渲染状态

@@ -7,6 +7,7 @@
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "宠物衣服AI",
+				"enablePullDownRefresh": true,
 				"navigationBarBackgroundColor": "#FCD610"
 			}
 		},
@@ -18,7 +19,6 @@
 				"navigationBarBackgroundColor": "#eff2f3"
 			}
 		},
-
 		{
 			"path": "pages/mine/mine",
 			"style": {

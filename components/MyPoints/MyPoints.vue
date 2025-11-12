@@ -11,7 +11,7 @@
 		</view>
 		<view class="flex-row items-center button" v-if="showTobtn" @click="handleToGongLue">
 			<text class="text_2">获取积分</text>
-			<u-icon name="arrow-right" color="#000" size="30rpx"></u-icon>
+			<u-icon name="arrow-right" color="#00000" size="30rpx"></u-icon>
 		</view>
 	</view>
 </template>
@@ -73,10 +73,12 @@ export default {
 		color: #666;
 	}
 	.button {
-		padding: 16rpx;
 		background-color: #ffffff;
 		border-radius: 8rpx;
-		height: 58rpx;
+		height: 70rpx;
+		line-height: 70rpx;
+		padding: 0 20rpx;
+		text-align: center;
 
 		.font_2 {
 			font-size: 24rpx;
